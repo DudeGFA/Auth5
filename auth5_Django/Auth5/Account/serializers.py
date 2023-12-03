@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import CustomUser
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -16,6 +17,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = CustomUser.objects.create_user(**validated_data)
         return user
+
+
+class CustomLoginSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data["email"] = self.user.email
+        return data
 
 
 class LogoutSerializer(serializers.Serializer):

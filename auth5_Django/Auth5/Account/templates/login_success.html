@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Successful</title>
+</head>
+<body>
+
+    <h2>Login Successful</h2>
+    <p>Welcome back! You have successfully logged in.</p>
+    <br><p>{{refresh_token_from_django_view}}</p>
+    <br><p>{{access_token_from_django_view}}</p>
+    <button onclick="logout()">Logout</button>
+</body>
+</html>
+    <script>
+        function logout() {
+            // Perform AJAX request to log the user out
+            // Include CSRF token in the request headers
+
+            // using Fetch API
+            fetch("{% url 'logout' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => {
+                // Handle the response, such as clearing stored tokens
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('accessToken');
+
+                // Redirect or update UI as needed
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Logout Error:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>
