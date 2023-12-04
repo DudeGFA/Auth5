@@ -19,13 +19,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return user
 
 
-class CustomLoginSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data["email"] = self.user.email
-        return data
-
-
 class LogoutSerializer(serializers.Serializer):
     refresh = serializers.CharField()
 
@@ -38,5 +31,6 @@ class LogoutSerializer(serializers.Serializer):
     def save(self, **kwargs):
         try:
             RefreshToken(self.token).blacklist()
+
         except TokenError:
             return self.default_error_message
