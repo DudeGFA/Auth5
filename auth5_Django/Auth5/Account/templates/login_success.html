@@ -7,6 +7,21 @@
 </head>
 <body>
 
+    {% if errors %}
+        <ul style="color: red;">
+            {% for key, value in errors.items %}
+                <li>{{ key }}: {{ value|join:", " }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if messages %}
+        <ul style="color: green;">
+            {% for key, value in messages.items %}
+                <li>{{ key }}: {{ value|join:", " }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <h2>Login Successful</h2>
     <p>Welcome back! You have successfully logged in.</p>
     <br><p>{{refresh_token_from_django_view}}</p>
