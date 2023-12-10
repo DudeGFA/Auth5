@@ -52,7 +52,7 @@ class UserProfile(TimestampsModel):
     
 
 class WebsiteAccount(TimestampsModel):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     website = models.ForeignKey(WebSite, on_delete=models.CASCADE)
     user_id_on_website = models.CharField(max_length=255)
 
