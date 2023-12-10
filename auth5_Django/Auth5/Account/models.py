@@ -29,7 +29,32 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, TimestampsModel):
     email = models.EmailField(_("email address"), unique=True)
     is_active = models.BooleanField(_("active"), default=True)
     is_staff = models.BooleanField(_("staff status"), default=False)
+    is_owner = models.BooleanField(_("owner status"), default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
+
+class WebSite(TimestampsModel):
+    name = models.CharField(max_length=255)
+    link = models.URLField()
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='websites')
+
+    def __str__(self):
+        return self.name
+    
+class UserProfile(TimestampsModel):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_profile')
+    websites = models.ManyToManyField('Website', through='WebsiteAccount', related_name='user_profiles')
+
+    def __str__(self):
+        return f"{self.user.email}'s Profile"
+    
+
+class WebsiteAccount(TimestampsModel):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    website = models.ForeignKey(WebSite, on_delete=models.CASCADE)
+    user_id_on_website = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.user.email}'s Account on {self.website.name}"
