@@ -4,6 +4,7 @@
 
 .env
 venv/
+.venv
 
 media/
 */migrations/0*.py
