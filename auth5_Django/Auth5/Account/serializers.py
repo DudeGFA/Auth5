@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -8,14 +8,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = [
-            "email",
+            "username",
             "password",
         ]
 
     def create(self, validated_data):
-        user = CustomUser.objects.create_user(**validated_data)
+        user = User.objects.create_user(**validated_data)
         return user
 
 

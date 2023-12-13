@@ -9,7 +9,8 @@
 
     <h2>Registration Successful</h2>
 
-    <p>Congratulations! You have successfully registered with the email: {{ email }}.</p>
+    <p>Congratulations! You have successfully registered.</p>
+    <p>Your Id is {{ username }} and your authentication token is {{ password }}</p>
     <!-- Login -->
     <a href="{% url 'login' %}">
         <button>Login</button>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+
+    <h2>Login</h2>
+
+    <!-- Display errors if they exist -->
+    <!-- {% if errors %}
+        <ul style="color: red;">
+            {% for key, value in errors.items %}
+                <li>{{ key }}: {{ value|join:", " }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} -->
+    <div>{{errors}}</div>
+    <!-- login form -->
+    <form id="loginForm" method="post">
+        <!-- CSRF token -->
+        {% csrf_token %}
+        
+        <label for="user_id">User Id:</label>
+        <input id="user_id" name="username" required>
+
+        <label for="id_password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+    <a href="/account/register/">Create A new Auth5 User Account</a>
+</body>
+</html>
