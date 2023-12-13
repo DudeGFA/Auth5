@@ -38,7 +38,7 @@ class Field(models.Model):
     recordid = models.CharField(max_length=250, null=True, blank=True)
     name = models.CharField(max_length=25)
     group = models.ForeignKey(FieldGroup, on_delete=models.CASCADE)
-
+    authorized_users = models.ManyToManyField(UserProfile, through='Authorization', related_name='authorized_fields')
     class Meta:
         unique_together = ['group', 'name']
 
@@ -53,7 +53,12 @@ class WebsiteAccount(models.Model):
     def __str__(self):
         return f"{self.user_profile.user.username}'s Account on {self.website.name}"
 
+class Authorization(models.Model):
+    field = models.ForeignKey(Field, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ('field', 'user_profile')
 
 # class CustomUserManager(BaseUserManager):
 #     def create_user(self, email, password=None, **extra_fields):

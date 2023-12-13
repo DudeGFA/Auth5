@@ -41,6 +41,7 @@
                 <input type="hidden" name="group" value="{{active_field_group.id}}">
                 <label for="{{ field.name }}_did">DID </label> <input id="{{ field.name }}_did" name="did" value='{{ field.did }}'>
                 <label for="{{ field.name }}_recordid">RECORD ID </label> <input id="{{ field.name }}_recordid" name="recordid" value='{{ field.recordid }}'>
+                <label for="{{ field.name }}_auth">Authorize Auth5 user </label> <input id="{{ field.name }}_auth" name="auth" placeholder="Enter user's Auth5 Id">
             </form>
             {% endfor %}
         </div>

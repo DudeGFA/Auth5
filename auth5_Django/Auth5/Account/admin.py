@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Account.models import Website, WebsiteAccount, UserProfile, Field, FieldGroup
+from Account.models import Website, WebsiteAccount, UserProfile, Field, FieldGroup, Authorization
 # from django.contrib.auth import get_user_model
 
 # UserModel = get_user_model()
@@ -14,3 +14,4 @@ admin.site.register(WebsiteAccount)
 admin.site.register(UserProfile)
 admin.site.register(Field)
 admin.site.register(FieldGroup)
+admin.site.register(Authorization)

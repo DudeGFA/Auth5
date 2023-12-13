@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from Account.models import FieldGroup, Field
+from Account.models import FieldGroup, Field, Authorization
 from .forms import GroupForm, FieldForm
 from django.shortcuts import  render, redirect
 from Account.forms import UrlForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 class HomeView(LoginRequiredMixin, View):
@@ -55,6 +56,7 @@ class HomeView(LoginRequiredMixin, View):
         elif request_type is None:
             field_name = request.POST.get("name")
             group_id = request.POST.get("group")
+            authorized_user_id = request.POST.get("auth")
             group = FieldGroup.objects.get(id=group_id)
             field = Field.objects.filter(name=field_name, group=group).first()
             field_form = FieldForm(request.POST or None, instance=field)
@@ -62,6 +64,14 @@ class HomeView(LoginRequiredMixin, View):
                 field_form.save()
             else:
                 print(field_form.errors)
+            if authorized_user_id:
+                print(authorized_user_id)
+                authorized_user = User.objects.filter(username=authorized_user_id.strip()).first()
+                if authorized_user:
+                    try:
+                        Authorization.objects.create(field=field, user_profile=authorized_user.profile)
+                    except Exception:
+                        pass
             return redirect("/dashboard/"+group.name)
         return redirect("/dashboard/")
 
