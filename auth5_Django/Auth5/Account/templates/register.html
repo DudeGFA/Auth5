@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>Auth5 Registration</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+    </style>
+    <script src=""></script>
+    <body>
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Request for a new Auth5 account</button>
+            </form>
+        </div>
+        <div>
+            <p>Already have an Auth5 user account?</p>
+            <a href="/account/login/">Click here to login</a>
+        </div>
+    </body>
+</html>

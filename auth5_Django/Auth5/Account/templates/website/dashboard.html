@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>Auth5 Registration</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+    </style>
+    <script src=""></script>
+    <body>
+
+        <div>
+            <h1 type="submit">welcome {{ user.username }}</h1>
+        </div>
+        <div>
+            <h3>Your website: {{ user.website.link }}</h3>
+            <h3>Your email: {{ user.email }}</h3>
+            <h3>Your Auth5 id: {{user.id}}</h3>
+        </div>
+        <div>
+            <h4>Edit Your Auth5 website account details</h4>
+            <form method="post" action="/dashboard/website/" id="cb-form">
+                {% csrf_token %}
+                <label for="callback-url">Callback URL</label> <input id='callback-url' name="callback-url" type="url" value="{{user.website.callback_url}}">
+            </form>
+            <input type="submit" form="cb-form">
+        </div>
+    </body>
+</html>
