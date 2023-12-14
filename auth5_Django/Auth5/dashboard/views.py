@@ -8,6 +8,10 @@ from Account.forms import UrlForm
 from django.contrib.auth.models import User
 
 # Create your views here.
+class LandingView(View):
+    def get(self, request):
+        return render(request, "landing.html")
+
 class HomeView(LoginRequiredMixin, View):
     def get(self, request, group='default field group'):
         # Getting all field groups owned by the user

@@ -1,36 +1,38 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href='{% static "css/login.css" %}'
+    />
 </head>
 <body>
-
-    <h2>Login</h2>
-
-    <!-- Display errors if they exist -->
-    <!-- {% if errors %}
-        <ul style="color: red;">
-            {% for key, value in errors.items %}
-                <li>{{ key }}: {{ value|join:", " }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %} -->
-    <div>{{errors}}</div>
-    <!-- login form -->
-    <form id="loginForm" method="post">
-        <!-- CSRF token -->
-        {% csrf_token %}
-        
-        <label for="user_id">User Id:</label>
-        <input id="user_id" name="username" required>
-
-        <label for="id_password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <button type="submit">Login</button>
-    </form>
-    <a href="/account/register/">Create A new Auth5 User Account</a>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt=""> 
+        </div>
+        <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
+        <form class="p-3 mt-3" id="loginForm" method="post">
+            <!-- CSRF token -->
+            {% csrf_token %}
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="username" id="username" placeholder="User Id">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="pwd" placeholder="Authentication Token">
+            </div>
+            <button class="btn mt-3">Login</button>
+        </form>
+        <div class="text-center fs-6">
+            New to Auth5? <a href="/account/register/">Sign up</a>
+        </div>
+    </div>
 </body>
 </html>
