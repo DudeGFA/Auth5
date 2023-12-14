@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
     <meta charset="UTF-8">
     <title>Auth5 Registration</title>
@@ -26,4 +26,51 @@
             <a href="/account/website/login/">Click here to login</a>
         </div>
     </body>
+</html> -->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href='{% static "css/login.css" %}'
+    />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt=""> 
+        </div>
+        <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
+        <form class="p-3 mt-3" id="loginForm" method="post" id="loginForm" method="post" action="/account/website/register/">
+            <!-- CSRF token -->
+            {% csrf_token %}
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="username" id="username" placeholder="Website name">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="url" id="url" placeholder="Website url">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="email" id="email" placeholder="Website email">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="password" placeholder="Input a desired password">
+            </div>
+            <button class="btn mt-3">Register</button>
+        </form>
+        <div class="text-center fs-6">
+            Already have an Auth5 website account?<a href="/account/website/login/">Click here to login</a>
+        </div>
+    </div>
+</body>
 </html>

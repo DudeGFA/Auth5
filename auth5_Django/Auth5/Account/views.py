@@ -46,7 +46,7 @@ class WebsiteLoginFormView(View):
                 if user is not None and user.website:
                     login(request, user)
                     print("successful authentication")
-                    return redirect("/dashboard")
+                    return redirect("/dashboard/website")
             except Exception:
                 pass
         ctx = {'errors':{'Authentication error':'Incorrect Login credentials'}}
@@ -90,15 +90,6 @@ class WebsiteRegistrationFormView(View):
     def get(self, request):
         return render(request, 'website/register.html')
 
-    def create_fields(self, new_user):
-        new_field_group = FieldGroup.objects.create(name='default field group', owner=new_user.profile)
-        image_field = Field.objects.create(name="Profile picture", group=new_field_group)
-        first_name_field = Field.objects.create(name="First name", group=new_field_group)
-        last_name_field = Field.objects.create(name="Last name", group=new_field_group)
-        middle_name_field = Field.objects.create(name="Middle name", group=new_field_group)
-        dob_field = Field.objects.create(name="Date of birth", group=new_field_group)
-        Address = Field.objects.create(name="Address", group=new_field_group)
-
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -121,7 +112,7 @@ class WebsiteRegistrationFormView(View):
                 print(newform.errors)
         except IntegrityError:
             pass
-        return render('/website/register', {'user_form_errors': newform.errors, 'url_form_errors': url_form.errors})
+        return render(request, '/website/register', {'user_form_errors': newform.errors, 'url_form_errors': url_form.errors})
 
 
 class RegistrationAPIView(generics.GenericAPIView):

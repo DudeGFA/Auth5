@@ -17,12 +17,12 @@
             <img src="{% static 'images/logo.png' %}" alt=""> 
         </div>
         <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
-        <form class="p-3 mt-3" id="loginForm" method="post" id="loginForm" method="post" action="/account/website/login/">
+        <form class="p-3 mt-3" id="loginForm" method="post">
             <!-- CSRF token -->
             {% csrf_token %}
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="text" name="username" id="username" placeholder="User Id">
+                <input type="text" name="userName" id="userName" placeholder="User Id">
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
@@ -31,7 +31,7 @@
             <button class="btn mt-3">Login</button>
         </form>
         <div class="text-center fs-6">
-            <a href="/account/website/register/">Create A new Auth5 Website Account</a>
+            New to Auth5? <a href="#">Sign up</a>
         </div>
     </div>
 </body>

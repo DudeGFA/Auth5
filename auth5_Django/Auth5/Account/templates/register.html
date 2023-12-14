@@ -1,23 +1,30 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Auth5 Registration</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="">
-    <style>
-    </style>
-    <script src=""></script>
-    <body>
-
-        <div>
-            <form method="post">
-                {% csrf_token %}
-                <button type="submit">Request for a new Auth5 account</button>
-            </form>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href='{% static "css/login.css" %}'
+    />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt=""> 
         </div>
-        <div>
-            <p>Already have an Auth5 user account?</p>
-            <a href="/account/login/">Click here to login</a>
+        <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
+        <form class="p-3 mt-3" id="loginForm" method="post">
+            <!-- CSRF token -->
+            {% csrf_token %}
+            <button class="btn mt-3" style="margin-top: 70px;">Request for a new Auth5 account</button>
+        </form>
+        <div class="text-center fs-6" style="margin-top: 20px;">
+           <p> Do you have an Existing Auth5 account? </p><a href="/account/login/">Click here to Sign in</a>
         </div>
-    </body>
+    </div>
+</body>
 </html>
