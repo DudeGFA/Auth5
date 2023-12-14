@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 from Account.serializers import FieldsSerializer
 import json
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 class LandingView(View):
@@ -112,17 +113,18 @@ class FetchDataView(generics.GenericAPIView):
     @csrf_exempt
     def send_post_request(self, payload):
         url = 'https://auth5js.onrender.com'  # Replace with your target URL
-
-        print('yeah')
         # Send the POST request
-        payload = json.dumps(payload)
-        response = requests.post(url, data=payload)
-        print(response.text)
-        # Return a JsonResponse with the response content
-        return Response({'response_content': response.text}, status=response.status_code)
+        try:
+            payload = json.dumps(payload)
+            # print(payload)
+            response = requests.post(url, data=payload, headers={"Content-Type": "application/json"})
+            # print(response.text)
+            # Return a JsonResponse with the response content
+        except requests.RequestException as e:
+            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({'response_content': response.json()}, status=response.status_code)
 
     def post(self, request, website_name, data_owner_id):
-        print('issues')
         serializer = FieldsSerializer(data=request.data)
         if serializer.is_valid():
             # Access the validated list
@@ -130,20 +132,20 @@ class FetchDataView(generics.GenericAPIView):
         else:
             print(serializer.errors)
             return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
-        print(fields)
-        data_owner_acct = WebsiteAccount.objects.filter(user_id_on_website=data_owner_id, website__user__username=website_name).first()
-        print(fields, data_owner_acct)
-        if not fields or not data_owner_acct:
+        # print(fields)
+        data_owner_website_account = get_object_or_404(WebsiteAccount, user_id_on_website=data_owner_id, website__user__username=website_name)
+        # print(fields, data_owner_acct)
+        if not fields or not data_owner_website_account:
             return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
-        field_group = data_owner_acct.field_group
-
+        field_group = data_owner_website_account.field_group
+        # print(field_group)
         payload = {}
         for field in fields:
-            field = field_group.field_set.filter(name=field.strip()).first()
-            if field:
-                Auth = Authorization.objects.filter(field=field, user_profile=request.user.profile)
-                if Auth:
-                    did = field.did
-                    recordid = field.recordid
-                    payload[field.name] = {'did':did, 'recordid': recordid}
+            field_obj = field_group.field_set.filter(name=field.strip()).first()
+            if field_obj:
+                Auth = Authorization.objects.filter(field=field_obj, user_profile=request.user.profile)
+                if Auth or field_obj.group.owner == request.user.profile:
+                    did = field_obj.did
+                    recordid = field_obj.recordid
+                    payload[field_obj.name] = {'did':did, 'recordId': recordid}
         return self.send_post_request(payload)
