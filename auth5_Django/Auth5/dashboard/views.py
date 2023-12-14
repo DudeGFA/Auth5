@@ -1,11 +1,19 @@
 from django.shortcuts import render
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from Account.models import FieldGroup, Field, Authorization
+from Account.models import FieldGroup, Field, Authorization, WebsiteAccount, Website
 from .forms import GroupForm, FieldForm
 from django.shortcuts import  render, redirect
 from Account.forms import UrlForm
 from django.contrib.auth.models import User
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework import generics
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import requests
+from Account.serializers import FieldsSerializer
+import json
 
 # Create your views here.
 class LandingView(View):
@@ -99,3 +107,43 @@ class WebsiteDashboardView(LoginRequiredMixin, View):
         else:
             print(url_form.errors)
         return redirect('/dashboard/website/')
+
+class FetchDataView(generics.GenericAPIView):
+    @csrf_exempt
+    def send_post_request(self, payload):
+        url = 'https://auth5js.onrender.com'  # Replace with your target URL
+
+        print('yeah')
+        # Send the POST request
+        payload = json.dumps(payload)
+        response = requests.post(url, data=payload)
+        print(response.text)
+        # Return a JsonResponse with the response content
+        return Response({'response_content': response.text}, status=response.status_code)
+
+    def post(self, request, website_name, data_owner_id):
+        print('issues')
+        serializer = FieldsSerializer(data=request.data)
+        if serializer.is_valid():
+            # Access the validated list
+            fields = serializer.validated_data.get("fields")
+        else:
+            print(serializer.errors)
+            return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+        print(fields)
+        data_owner_acct = WebsiteAccount.objects.filter(user_id_on_website=data_owner_id, website__user__username=website_name).first()
+        print(fields, data_owner_acct)
+        if not fields or not data_owner_acct:
+            return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+        field_group = data_owner_acct.field_group
+
+        payload = {}
+        for field in fields:
+            field = field_group.field_set.filter(name=field.strip()).first()
+            if field:
+                Auth = Authorization.objects.filter(field=field, user_profile=request.user.profile)
+                if Auth:
+                    did = field.did
+                    recordid = field.recordid
+                    payload[field.name] = {'did':did, 'recordid': recordid}
+        return self.send_post_request(payload)

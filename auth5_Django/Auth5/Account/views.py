@@ -12,7 +12,7 @@ from django.db import IntegrityError
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from Account.models import Field, FieldGroup, UserProfile, WebsiteAccount, Website
-from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.forms import UserCreationForm
 
 class LoginFormView(LoginView):
     def post(self, request):
@@ -112,7 +112,7 @@ class WebsiteRegistrationFormView(View):
                 print(newform.errors)
         except IntegrityError:
             pass
-        return render(request, '/website/register', {'user_form_errors': newform.errors, 'url_form_errors': url_form.errors})
+        return render(request, 'website/register', {'user_form_errors': newform.errors, 'url_form_errors': url_form.errors})
 
 
 class RegistrationAPIView(generics.GenericAPIView):

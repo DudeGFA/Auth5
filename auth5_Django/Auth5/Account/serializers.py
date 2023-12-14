@@ -34,3 +34,7 @@ class LogoutSerializer(serializers.Serializer):
 
         except TokenError:
             return self.default_error_message
+
+class FieldsSerializer(serializers.Serializer):
+    fields = serializers.ListField(child=serializers.CharField())
+
