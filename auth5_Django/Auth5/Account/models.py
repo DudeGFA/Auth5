@@ -51,7 +51,7 @@ class WebsiteAccount(models.Model):
     user_id_on_website = models.CharField(max_length=255)
     field_group = models.ForeignKey(FieldGroup, on_delete=models.PROTECT, blank=True, null=True)
     def __str__(self):
-        return f"{self.user_profile.user.username}'s Account on {self.website.name}"
+        return f"{self.user_profile.user.username}'s Account on {self.website.user.username}"
 
 class Authorization(models.Model):
     field = models.ForeignKey(Field, on_delete=models.CASCADE)
