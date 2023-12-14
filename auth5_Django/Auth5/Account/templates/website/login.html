@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href='{% static "css/login.css" %}'
-    />
+    <link rel="stylesheet" type="text/css" href='{% static "css/login.css" %}' />
 </head>
+
 <body>
     <div class="wrapper">
         <div class="logo">
-            <img src="{% static 'images/logo.png' %}" alt=""> 
+            <img src="{% static 'images/logo.png' %}" alt="">
         </div>
         <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
-        <form class="p-3 mt-3" id="loginForm" method="post" id="loginForm" method="post" action="/account/website/login/">
+        <form class="p-3 mt-3" id="loginForm" method="post" id="loginForm" method="post"
+            action="/account/website/login/">
             <!-- CSRF token -->
             {% csrf_token %}
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="text" name="username" id="username" placeholder="Website Account Username">
+                <input type="text" name="username" id="username" placeholder="Website name">
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password" id="pwd" placeholder="Website Account Password">
+                <input type="password" name="password" id="pwd" placeholder="Password">
             </div>
             <button class="btn mt-3">Login</button>
         </form>
@@ -35,4 +34,5 @@
         </div>
     </div>
 </body>
+
 </html>
