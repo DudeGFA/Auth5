@@ -22,82 +22,90 @@
     <link href="{% static 'css/landing.css' %}" rel="stylesheet">
 </head>
 
-<body class="container mt-5">
+<body>
+    <div class="d-flex justify-content-center align-items-center"
+        style="background-color: #093e5a; height: 300px; color: white;">
 
-    <div>
-        <h1 class="text-center mb-4">Welcome {{ user.username }}</h1>
+        <div class="text-center">
+            <a href="index.html" class="logo d-flex align-items-center mb-3"
+                style="display: flex; align-items: center; justify-content: center;">
+                <img style="height: 100px; width: auto;" src="{% static 'images/logo_transparent.png' %}" alt="">
+            </a>
+            <h1 class="mb-4px" style="font-size: 2rem;">Welcome {{ user.username }}</h1>
+            <div class="text-white p-3 rounded">
+                <h3>Input the Decentralized identifiers and record Ids of your Personal identifiable information</h3>
+            </div>
+        </div>
     </div>
+    <div class="container mt-5">
+        <div>
+            <h4>Ensure READ access is granted to DID:</h4>
+            <form method="post" id="create-group">
+                {% csrf_token %}
+                <input type="hidden" name="type" value="group">
 
-    <div>
-        <h3>Input the Decentralized identifiers and record Ids of your Personal identifiable information</h3>
-        <h4>Ensure READ access is granted to DID:</h4>
-
-        <form method="post" id="create-group">
-            {% csrf_token %}
-            <input type="hidden" name="type" value="group">
-
-            <div class="form-group">
-                <label for="groups">Select a group of fields:</label>
-                <select class="form-control" name="groups" id="groups">
-                    {% for group_name in field_group_names %}
-                    <option value="{{group_name}}" {% if group_name == active_field_group.name %} selected="selected" {% endif %}>
-                        {{group_name}}
-                    </option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <input type="submit" class="btn btn-primary" form="create-group" value="Add a new group">
+                <div class="form-group">
+                    <label for="groups">Select a group of fields:</label>
+                    <select class="form-control" name="groups" id="groups">
+                        {% for group_name in field_group_names %}
+                        <option value="{{group_name}}" {% if group_name == active_field_group.name %} selected="selected" {% endif %}>
+                            {{group_name}}
+                        </option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="form-group col-md-6">
-                    <input id="new_group" name="new_group" class="form-control" placeholder="Enter name of new group">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" class="btn btn-primary" form="create-group" value="Add a new group">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input id="new_group" name="new_group" class="form-control" placeholder="Enter name of new group">
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
-        <form method="post" id="create-field">
-            {% csrf_token %}
-            <input type="hidden" name="type" value="field">
-            <input type="hidden" name="group" value="{{active_field_group.id}}">
+            <form method="post" id="create-field">
+                {% csrf_token %}
+                <input type="hidden" name="type" value="field">
+                <input type="hidden" name="group" value="{{active_field_group.id}}">
 
-            <div class="form-group">
-                <h2>Fields</h2>
-                <input id="new_field" name="new_field" class="form-control" placeholder="Enter name of new field">
-                <button type="submit" class="btn btn-success mt-3">Add a new field</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <h2>Fields</h2>
+                    <input id="new_field" name="new_field" class="form-control" placeholder="Enter name of new field">
+                    <button type="submit" class="btn btn-success mt-3">Add a new field</button>
+                </div>
+            </form>
 
-        {% for field in active_field_group.field_set.all %}
-        <form method="post">
-            {% csrf_token %}
-            <h3>{{ field.name }}</h3>
-            <input type="hidden" name="name" value="{{ field.name }}">
-            <input type="hidden" name="group" value="{{active_field_group.id}}">
+            {% for field in active_field_group.field_set.all %}
+            <form method="post">
+                {% csrf_token %}
+                <h3>{{ field.name }}</h3>
+                <input type="hidden" name="name" value="{{ field.name }}">
+                <input type="hidden" name="group" value="{{active_field_group.id}}">
 
-            <div class="form-group">
-                <label for="{{ field.name }}_did">DID </label>
-                <input id="{{ field.name }}_did" name="did" class="form-control" value='{{ field.did }}'>
-            </div>
+                <div class="form-group">
+                    <label for="{{ field.name }}_did">DID </label>
+                    <input id="{{ field.name }}_did" name="did" class="form-control" value='{{ field.did }}'>
+                </div>
 
-            <div class="form-group">
-                <label for="{{ field.name }}_recordid">RECORD ID </label>
-                <input id="{{ field.name }}_recordid" name="recordid" class="form-control" value='{{ field.recordid }}'>
-            </div>
+                <div class="form-group">
+                    <label for="{{ field.name }}_recordid">RECORD ID </label>
+                    <input id="{{ field.name }}_recordid" name="recordid" class="form-control" value='{{ field.recordid }}'>
+                </div>
 
-            <div class="form-group">
-                <label for="{{ field.name }}_auth">Authorize Auth5 user </label>
-                <input id="{{ field.name }}_auth" name="auth" class="form-control" placeholder="Enter user's Auth5 Id">
-            </div>
+                <div class="form-group">
+                    <label for="{{ field.name }}_auth">Authorize Auth5 user </label>
+                    <input id="{{ field.name }}_auth" name="auth" class="form-control" placeholder="Enter user's Auth5 Id">
+                </div>
 
-            <button class="btn btn-danger mb-3">Delete field</button>
-            <button class="btn btn-warning mb-3">Update modified field</button>
-        </form>
-        
-        {% endfor %}
+                <button class="btn btn-danger mb-3">Delete field</button>
+                <button class="btn btn-warning mb-3">Update modified field</button>
+            </form>
+            
+            {% endfor %}
+        </div>
     </div>
-
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
