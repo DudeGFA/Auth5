@@ -31,7 +31,13 @@ class CallbackView(View):
             response = requests.get(f'https://auth5.pythonanywhere.com/authentication/tbd/validate_token/?token={token}&id={id}')
             if response.status_code == 200:
                 user, _ = User.objects.get_or_create(username=id, password=id)
-                UserProfile.objects.create(user=user, token=token)
+                conditions = {
+                    'user': user,
+                }
+                defaults = {
+                    'token': token,
+                }
+                UserProfile.objects.update_or_create(**conditions, defaults=defaults)
                 login(request, user)
                 return redirect("/userprofile/"+id)
             print('Invalid token or Id, response returned with status code: ', response.status_code)  
