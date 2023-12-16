@@ -113,7 +113,7 @@
             };
 
             // Make the fetch API request
-            fetch('https://auth5.pythonanywhere.com/fetch/decentralizedsocial/{{user.username}}/', {
+            fetch('https://auth5.pythonanywhere.com/fetch/decentralizedsocial/{{user.username}}/{{profile_owner.username}}/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

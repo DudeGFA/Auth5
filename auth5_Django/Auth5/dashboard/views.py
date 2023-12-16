@@ -126,7 +126,7 @@ class FetchDataView(generics.GenericAPIView):
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response({'response_content': response.json()}, status=response.status_code)
 
-    def post(self, request, website_name, data_owner_id, user_id):
+    def post(self, request, website_name, user_id, data_owner_id):
         serializer = FieldsSerializer(data=request.data)
         if serializer.is_valid():
             # Access the validated list

@@ -18,7 +18,7 @@ class UserProfileView(LoginRequiredMixin, View):
             user = User.objects.get(username=id)
         except ObjectDoesNotExist:
             return render(request, "user_not_found.html", {'id': id})
-        return render(request, "profile_page.html")
+        return render(request, "profile_page.html", {'profile_owner': user})
 
 class LoginFormView(LoginView):
     def post(self, request, id):
