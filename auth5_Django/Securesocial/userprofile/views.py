@@ -6,6 +6,7 @@ import requests
 from django.contrib.auth import authenticate, login
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import UserProfile
 
 class HomeView(LoginRequiredMixin, View):
     def get(self, request):
