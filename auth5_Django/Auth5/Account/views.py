@@ -105,24 +105,27 @@ class WebsiteRegistrationFormView(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
         email = request.POST.get('email')
-        link = request.POST.get('link')
+        link = request.POST.get('url')
+        callback_url = request.POST.get('callback_url')
+        print(username, password, email, link, callback_url)
         try:
             newform = NewWebsiteUserForm({'username': username, 'password1': password, 'password2': password, 'email': email})
             url_form = UrlForm({'url': link})
             if newform.is_valid() and url_form.is_valid():
                 new_user = newform.save()
-                new_website = WebsiteForm({'user': new_user, 'link': link})
+                new_website = WebsiteForm({'user': new_user, 'link': link, 'callback_url': callback_url})
                 if new_website.is_valid():
                     new_website.save()
                     login(request, new_user)
                     context = {}
                     return redirect('/dashboard/website')
                 else:
+
                     print(new_website.errors)
             else:
                 print(newform.errors)
-        except IntegrityError:
-            pass
+        except IntegrityError as e:
+            return render(request, 'website/register.html', {'user_form_errors': 'website account already exists'})
         return render(request, 'website/register.html', {'user_form_errors': newform.errors, 'url_form_errors': url_form.errors})
 
 
