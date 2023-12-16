@@ -110,7 +110,7 @@ class WebsiteDashboardView(LoginRequiredMixin, View):
             print(url_form.errors)
         return redirect('/dashboard/website/')
 
-@method_decorator(csrf_exempt, name='dispatch')
+# @method_decorator(csrf_exempt, name='dispatch')
 class FetchDataView(generics.GenericAPIView):
     def send_post_request(self, payload):
         url = 'https://auth5js.onrender.com'  # Replace with your target URL
