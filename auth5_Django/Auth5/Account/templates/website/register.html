@@ -60,16 +60,24 @@
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="text" name="email" id="email" placeholder="Website email">
+                <input type="email" name="email" id="email" placeholder="Website email">
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
                 <input type="password" name="password" id="password" placeholder="Input a desired password">
             </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="text" name="callback_url" id="callback_url" placeholder="Input your callback url">
+            </div>
             <button class="btn mt-3">Register</button>
         </form>
         <div class="text-center fs-6">
             Already have an Auth5 website account?<a href="/account/website/login/">Click here to login</a>
+        </div>
+        <div class="text-center fs-6">
+            {{user_form_errors}}
+            {{url_form_errors}}
         </div>
     </div>
 </body>
