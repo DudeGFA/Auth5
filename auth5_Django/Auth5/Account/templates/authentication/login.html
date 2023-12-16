@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href='{% static "css/login.css" %}'
+    />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt=""> 
+        </div>
+        <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
+        <div style="margin-bottom: 10px; margin-top: 10px;">Input your Auth5 credentials to be granted access to your tbd account</div>
+        <form class="p-3 mt-3" id="loginForm" method="post" action="/authentication/{{website_name}}/">
+            <!-- CSRF token -->
+            {% csrf_token %}
+            <input type="hidden" name="referring_url" value="{{referring_url}}">
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="username" id="username" placeholder="User Id">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="pwd" placeholder="Authentication Token">
+            </div>
+            <button class="btn mt-3">Login</button>
+        </form>
+        <div class="text-center fs-6">
+            New to Auth5? <a href="/account/register/?website={{website_name}}">Sign up</a>
+        </div>
+        <div class="text-center fs-6">{{error_message}}</div>
+    </div>
+</body>
+</html>

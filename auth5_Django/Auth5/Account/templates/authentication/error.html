@@ -17,10 +17,9 @@
             <img src="{% static 'images/logo.png' %}" alt=""> 
         </div>
         <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
-        <h2>Registration Successful</h2>
-        <p>Congratulations! You have successfully registered.</p>
-        <p>Your Id is <h3>{{ username }}</h3> and your authentication token is <h3>{{ password }}</h3></p>
-        <a href="{% url 'login' %}"><button class="btn mt-3" style="margin-top: 70px;">Return to login</button></a>
+        <div class="text-center fs-6">
+            An error occured: {{error}}
+        </div>
     </div>
 </body>
 </html>

@@ -1,60 +1,127 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-    <meta charset="UTF-8">
-    <title>Auth5 Registration</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="">
-    <style>
-    </style>
-    <script src=""></script>
-    <body>
 
-        <div>
-            <h1 type="submit">welcome {{ user.username }}</h1>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Auth5 Registration</title>
+
+    <!-- Favicons -->
+    <link href="{% static 'images/logo.png' %}" rel="icon">
+    <link href="{% static 'images/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Your Landing Page CSS -->
+    <link href="{% static 'css/landing.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex justify-content-center align-items-center"
+        style="background-color: #093e5a; height: 300px; color: white;">
+
+        <div class="text-center">
+            <a href="" class="logo d-flex align-items-center mb-3"
+                style="display: flex; align-items: center; justify-content: center;">
+                <img style="height: 100px; width: auto;" src="{% static 'images/logo_transparent.png' %}" alt="">
+            </a>
+            <h1 class="mb-4px" style="font-size: 2rem;">Welcome {{ user.username }}</h1>
+            <div class="text-white p-3 rounded">
+                <h3>Input the Decentralized identifiers and record Ids of your Personal identifiable information</h3>
+            </div>
         </div>
+    </div>
+    <div class="container mt-5">
         <div>
-            <h3>Input the Decentralized identifiers and record Ids of your Personal identifiable information</h3>
-            <h4>Ensure READ access is granted to DID: </h4>
+            <h4>Ensure READ access is granted to DID:</h4>
             <form method="post" id="create-group">
                 {% csrf_token %}
                 <input type="hidden" name="type" value="group">
-                <h2>Groups</h2>
-                <label for="websites">Select a group of fields:</label>
-                <select name="groups" id="groups">
-                    {% for group_name in field_group_names %}
-                    <option value="{{group_name}}" {% if group_name == active_field_group.name %} selected="selected" {% endif %}>{{group_name}}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" form="create-group" value="Add a new group"> <input id="new_group" name="new_group" placeholder="Enter name of new group">
+
+                <div class="form-group">
+                    <label for="groups">Select a group of fields:</label>
+                    <select class="form-control" name="groups" id="groups">
+                        {% for group_name in field_group_names %}
+                        <option value="{{group_name}}" {% if group_name == active_field_group.name %} selected="selected" {% endif %}>
+                            {{group_name}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" class="btn btn-primary" form="create-group" value="Add a new group">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input id="new_group" name="new_group" class="form-control" placeholder="Enter name of new group">
+                    </div>
+                </div>
             </form>
+
             <form method="post" id="create-field">
                 {% csrf_token %}
                 <input type="hidden" name="type" value="field">
                 <input type="hidden" name="group" value="{{active_field_group.id}}">
-                <h2>Fields</h2> <button type="submit" form="create-field">Add a new field</button> <input id="new_field" name="new_field" placeholder="Enter name of new field">
+
+                <div class="form-group">
+                    <h2>Fields</h2>
+                    <input id="new_field" name="new_field" class="form-control" placeholder="Enter name of new field">
+                    <button type="submit" class="btn btn-success mt-3">Add a new field</button>
+                </div>
             </form>
+
             {% for field in active_field_group.field_set.all %}
             <form method="post">
                 {% csrf_token %}
-                <h3> {{ field.name }} </h3> <button>Delete field</button> <button>Update modified field</button>
+                <h3>{{ field.name }}</h3>
                 <input type="hidden" name="name" value="{{ field.name }}">
                 <input type="hidden" name="group" value="{{active_field_group.id}}">
-                <label for="{{ field.name }}_did">DID </label> <input id="{{ field.name }}_did" name="did" value='{{ field.did }}'>
-                <label for="{{ field.name }}_recordid">RECORD ID </label> <input id="{{ field.name }}_recordid" name="recordid" value='{{ field.recordid }}'>
-                <label for="{{ field.name }}_auth">Authorize Auth5 user </label> <input id="{{ field.name }}_auth" name="auth" placeholder="Enter user's Auth5 Id">
+
+                <div class="form-group">
+                    <label for="{{ field.name }}_did">DID </label>
+                    <input id="{{ field.name }}_did" name="did" class="form-control" value='{{ field.did }}'>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ field.name }}_recordid">RECORD ID </label>
+                    <input id="{{ field.name }}_recordid" name="recordid" class="form-control" value='{{ field.recordid }}'>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ field.name }}_auth">Authorize Auth5 user </label>
+                    <input id="{{ field.name }}_auth" name="auth" class="form-control" placeholder="Enter user's Auth5 Id">
+                </div>
+
+                <button class="btn btn-danger mb-3">Delete field</button>
+                <button class="btn btn-warning mb-3">Update modified field</button>
             </form>
+            
             {% endfor %}
         </div>
-    </body>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         // Get the form element
         var createGroupForm = document.getElementById('create-group');
-    
+
         // Add an event listener for the 'change' event on the select element
-        document.getElementById('groups').addEventListener('change', function() {
+        document.getElementById('groups').addEventListener('change', function () {
             // Submit the form when the selection changes
-            document.getElementById('new_group').value = ''
+            document.getElementById('new_group').value = '';
             createGroupForm.submit();
         });
     </script>
+</body>
+
 </html>
