@@ -22,7 +22,7 @@ class LandingView(View):
         return render(request, "landing.html")
 
 class HomeView(LoginRequiredMixin, View):
-    def get(self, request, group='default field group'):
+    def get(self, request, group='default_field_group'):
         # Getting all field groups owned by the user
         try:
             if not request.user.profile:
