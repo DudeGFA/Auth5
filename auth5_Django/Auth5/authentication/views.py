@@ -57,7 +57,7 @@ class AuthenticateView(View):
         else:
             print(website)
             ctx = {'error': 'Website with name '+website_name+" isn't registered with Auth5"}
-            return render(request, 'authentication/error.html')
+            return render(request, 'authentication/error.html', ctx)
 
     def post(self, request, website_name):
         # Implement your authentication logic here
