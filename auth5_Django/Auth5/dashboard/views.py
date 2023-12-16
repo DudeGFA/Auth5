@@ -147,7 +147,7 @@ class FetchDataView(generics.GenericAPIView):
             field_obj = field_group.field_set.filter(name=field.strip()).first()
             if field_obj:
                 Auth = Authorization.objects.filter(field=field_obj, user_profile=user_website_account.user_profile).first()
-                if Auth or field_obj.group.owner == request.user.profile:
+                if Auth or field_obj.group.owner == user_website_account.user_profile:
                     did = field_obj.did
                     recordid = field_obj.recordid
                     payload[field_obj.name] = {'did':did, 'recordId': recordid}
