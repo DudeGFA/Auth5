@@ -28,7 +28,8 @@ class CallbackView(View):
         token = request.GET.get("token")
         id = request.GET.get("user_id")
         if token and id:
-            response = requests.get(f'https://auth5.pythonanywhere.com/authentication/tbd/validate_token/?token={token}&id={id}')
+            print('token: ', token, 'id: ', id)
+            response = requests.get(f'https://auth5.pythonanywhere.com/authentication/decentralizedsocial/validate_token/?token={token}&id={id}')
             if response.status_code == 200:
                 user, _ = User.objects.get_or_create(username=id, password=id)
                 UserProfile.objects.create(user=user, token=token)
