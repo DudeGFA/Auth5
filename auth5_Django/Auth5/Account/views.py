@@ -123,7 +123,7 @@ class WebsiteRegistrationFormView(View):
                 print(newform.errors)
         except IntegrityError:
             pass
-        return render(request, 'website/register', {'user_form_errors': newform.errors, 'url_form_errors': url_form.errors})
+        return render(request, 'website/register.html', {'user_form_errors': newform.errors, 'url_form_errors': url_form.errors})
 
 
 class RegistrationAPIView(generics.GenericAPIView):
