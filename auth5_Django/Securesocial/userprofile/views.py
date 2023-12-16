@@ -34,4 +34,7 @@ class CallbackView(View):
                 UserProfile.objects.create(user=user, token=token)
                 login(request, user)
                 return redirect("/userprofile/"+id)
-        return redirect("/login/")
+            print('Invalid token or Id, response returned with status code: ', response.status_code)  
+            return render("/login/", {'error': 'something went wrong'})
+        print('token or id not specified in callback request', 'token: ', token, 'id: ',id)  
+        return render("/login/", {'error': 'something went wrong'})
