@@ -46,6 +46,22 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Authentication URL</h5>
+                        <p class="card-text">https://auth5.pythonanywhere.com/authentication/{{user.username}}/</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Token Validation endpoint</h5>
+                        <p class="card-text">https://auth5.pythonanywhere.com/authentication/{{user.username}}/validate_token/?token={token_to_be_validated}&id={user_id}</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="mt-5">
             <h4>Edit Your Auth5 website account details</h4>

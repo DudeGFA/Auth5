@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 class Website(models.Model):
     link = models.URLField()
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='website')
-    callback_url = models.URLField(blank=True, null=True)
+    callback_url = models.URLField()
     def __str__(self):
         return self.user.username
 
@@ -48,8 +48,10 @@ class Field(models.Model):
 class WebsiteAccount(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     website = models.ForeignKey(Website, on_delete=models.CASCADE)
-    user_id_on_website = models.CharField(max_length=255)
+    user_id_on_website = models.CharField(max_length=255, blank=True, null=True)
     field_group = models.ForeignKey(FieldGroup, on_delete=models.PROTECT, blank=True, null=True)
+    validation_token = models.CharField(max_length=255, blank=True, null=True)
+
     def __str__(self):
         return f"{self.user_profile.user.username}'s Account on {self.website.user.username}"
 

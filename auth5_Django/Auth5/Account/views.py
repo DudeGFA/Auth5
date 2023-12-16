@@ -55,19 +55,27 @@ class WebsiteLoginFormView(View):
 class RegistrationFormView(View):
 
     def get(self, request):
+        website_name = request.GET.get("website")
+        print(website_name, 'get')
+        if website_name:
+            return render(request, 'authentication/register.html', {'website_name': website_name})
         return render(request, 'register.html')
 
     def create_fields(self, new_user):
-        new_field_group = FieldGroup.objects.create(name='default field group', owner=new_user.profile)
-        image_field = Field.objects.create(name="Profile picture", group=new_field_group)
-        first_name_field = Field.objects.create(name="First name", group=new_field_group)
-        last_name_field = Field.objects.create(name="Last name", group=new_field_group)
-        middle_name_field = Field.objects.create(name="Middle name", group=new_field_group)
-        dob_field = Field.objects.create(name="Date of birth", group=new_field_group)
-        Address = Field.objects.create(name="Address", group=new_field_group)
+        new_field_group = FieldGroup.objects.create(name='default_field_group', owner=new_user.profile)
+        image_field = Field.objects.create(name="profile_picture", group=new_field_group)
+        first_name_field = Field.objects.create(name="first_name", group=new_field_group)
+        last_name_field = Field.objects.create(name="last_name", group=new_field_group)
+        middle_name_field = Field.objects.create(name="middle_name", group=new_field_group)
+        dob_field = Field.objects.create(name="date_of_birth", group=new_field_group)
+        Address = Field.objects.create(name="address", group=new_field_group)
+        phone = Field.objects.create(name="phone_number", group=new_field_group)
+        occupation = Field.objects.create(name="occupation", group=new_field_group)
 
     def post(self, request):
         random_password = secrets.token_urlsafe(16)
+        website_name = request.POST.get("website_name")
+        print(website_name, 'post')
         while (True):
             try:
                 user_id = uuid.uuid4()
@@ -78,6 +86,9 @@ class RegistrationFormView(View):
                     self.create_fields(new_user)
                     login(request, new_user)
                     context = {'username': user_id, 'password': random_password}
+                    if (website_name):
+                        context['website_name'] = website_name
+                        return render(request, 'authentication/register_success.html', context)
                     return render(request, 'signup_success.html', context)
                 else:
                     print(newform.errors)

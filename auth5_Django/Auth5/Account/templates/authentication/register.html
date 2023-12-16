@@ -17,10 +17,15 @@
             <img src="{% static 'images/logo.png' %}" alt=""> 
         </div>
         <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
-        <h2>Registration Successful</h2>
-        <p>Congratulations! You have successfully registered.</p>
-        <p>Your Id is <h3>{{ username }}</h3> and your authentication token is <h3>{{ password }}</h3></p>
-        <a href="{% url 'login' %}"><button class="btn mt-3" style="margin-top: 70px;">Return to login</button></a>
+        <form class="p-3 mt-3" id="loginForm" method="post">
+            <!-- CSRF token -->
+            {% csrf_token %}
+            <input type="hidden" name="website_name" value="{{website_name}}">
+            <button class="btn mt-3" style="margin-top: 70px;">Request for a new Auth5 account</button>
+        </form>
+        <div class="text-center fs-6" style="margin-top: 20px;">
+           <p> Do you have an Existing Auth5 account? </p><a href="/authentication/{{website_name}}">Click here to Sign in</a>
+        </div>
     </div>
 </body>
 </html>
