@@ -10,6 +10,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import generics
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import requests
 from Account.serializers import FieldsSerializer
@@ -109,8 +110,8 @@ class WebsiteDashboardView(LoginRequiredMixin, View):
             print(url_form.errors)
         return redirect('/dashboard/website/')
 
+@method_decorator(csrf_exempt, name='dispatch')
 class FetchDataView(generics.GenericAPIView):
-    @csrf_exempt
     def send_post_request(self, payload):
         url = 'https://auth5js.onrender.com'  # Replace with your target URL
         # Send the POST request
