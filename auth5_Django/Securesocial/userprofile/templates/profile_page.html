@@ -21,7 +21,7 @@
     <body>
         <div class="container">
             <div class="main-body">
-            
+
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="main-breadcrumb">
                     <ol class="breadcrumb">
@@ -31,7 +31,7 @@
                     </ol>
                 </nav>
                 <!-- /Breadcrumb -->
-            
+
                 <div class="row gutters-sm">
                     <div class="col-md-4 mb-3">
                     <div class="card">
@@ -39,9 +39,9 @@
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
-                            <h4>John Doe</h4>
-                            <p class="text-secondary mb-1" id="occupation">Full Stack Developer</p>
-                            <p class="text-muted font-size-sm" id="address2">Bay Area, San Francisco, CA</p>
+                            <h4 id="full_name2">Awaiting data</h4>
+                            <p class="text-secondary mb-1" id="occupation">Awaiting data</p>
+                            <p class="text-muted font-size-sm" id="address2">Awaiting data</p>
                             <button class="btn btn-primary">Follow</button>
                             <button class="btn btn-outline-primary">Message</button>
                             </div>
@@ -57,7 +57,7 @@
                                     <h6 class="mb-0">Full Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary" id="full_name">
-                                    Kenneth Valdez
+                                    Awaiting data
                                     </div>
                                 </div>
                                 <hr>
@@ -66,7 +66,7 @@
                                     <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary" id="email">
-                                    fip@jukmuh.al
+                                    Awaiting data
                                     </div>
                                 </div>
                                 <hr>
@@ -75,17 +75,16 @@
                                     <h6 class="mb-0">Phone number</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary" id="phone_number">
-                                    (239) 816-9029
+                                    Awaiting data
                                     </div>
                                 </div>
-                                <hr>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
                                     <h6 class="mb-0">Address</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary" id="address">
-                                    Bay Area, San Francisco, CA
+                                    <div class="col-sm-9 text-secondary" id="address1">
+                                    Awaiting data
                                     </div>
                                 </div>
                                 <hr>
@@ -124,13 +123,14 @@
                 fields_data = data.response_content
                 // document.getElementById('first_name').innerHtml = fields_data.first_name
                 // document.getElementById('last_name').innerHtml = fields_data.last_name
-                document.getElementById('address').innerHtml = fields_data.address
-                document.getElementById('address2').innerHtml = fields_data.address
-                document.getElementById('occupation').innerHtml = fields_data.occupation
-                document.getElementById('date_of_birth').innerHtml = fields_data.date_of_birth
-                document.getElementById('phone_number').innerHtml = fields_data.phone_number
-                document.getElementById('email').innerHtml = fields_data.email
-                document.getElementById('full_name').innerHtml = fields_data.first_name + fields_data.last_name
+                // document.getElementById('address').innerHTML = fields_data.address
+                document.getElementById('address2').innerHTML = fields_data.address
+                document.getElementById('occupation').innerHTML = fields_data.occupation
+                document.getElementById('address1').innerHTML = fields_data.address
+                document.getElementById('phone_number').innerHTML = fields_data.phone_number
+                document.getElementById('email').innerHTML = fields_data.email
+                document.getElementById('full_name').innerHTML = fields_data.first_name + fields_data.last_name
+                document.getElementById('full_name2').innerHTML = fields_data.first_name + fields_data.last_name
             })
             .catch(error => {
                 // Handle errors
