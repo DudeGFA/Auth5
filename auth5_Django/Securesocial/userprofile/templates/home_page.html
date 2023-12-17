@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<title>Page Title</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="">
-<style>
-</style>
-<script src=""></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Decentralized Social</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #163e44;
+        }
+
+        .lead {
+            color: #6c757d;
+        }
+
+        .btn-primary {
+            background-color: #50a4ee;
+            border-color: #50d9ee;
+        }
+
+        .btn-primary:hover {
+            background-color: #1f4d54;
+            border-color: #ffffff;
+        }
+    </style>
+</head>
+
 <body>
-    <h1>Welcome to Decentralized Social</h1>
-    <p>This app was created to serve as a sample of Auth5 integration. It has web pages to view user profiles containing their Personal Identifiable information</p>
-    <p>To view A user's PII, you must be permitted by the PII owner on Auth5 to view that particular PII</p>
-    <p>The PII owner grants you permission using your Auth5 User Id</p>
-    <a href="https://decentralizedsocial.pythonanywhere.com/login/">Click here to log in using auth5</a>
-    <p>On successful login, you will be redirected to your profile</p>
+    <div class="container">
+        <div class="text-center">
+            <h1>Welcome to Decentralized Social</h1>
+            <p class="lead">This app was created to serve as a sample of Auth5 integration. It has web pages to view
+                user profiles containing their Personal Identifiable information</p>
+            <p class="lead">To view a user's PII, you must be permitted by the PII owner on Auth5 to view that
+                particular PII</p>
+            <p class="lead">The PII owner grants you permission using your Auth5 User Id</p>
+            <a href="https://decentralizedsocial.pythonanywhere.com/login/" class="btn btn-primary btn-lg">Click here to
+                log in using Auth5</a>
+            <p class="lead mt-3">On successful login, you will be redirected to your profile</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
