@@ -35,7 +35,10 @@ function isUndefinedEmptyorNull(value) {
 		return true
 	}
 }
-
+app.get('/test', async (req, res) => {
+  res.status(200).json({ 'message': 'I am alive' });
+});
+	
 app.post('/', async (req, res) => {
     try {
         let data = req.body;
