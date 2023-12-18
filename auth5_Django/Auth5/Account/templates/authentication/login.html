@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href='{% static "css/login.css" %}'
-    />
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .logo {
+            margin: 0 20px;
+        }
+
+        .arrow {
+            display: flex;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+        .arrow::before {
+            content: "\2192";
+            /* Unicode arrow-right character */
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .name {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href='{% static "css/login.css" %}' />
 </head>
+
 <body>
     <div class="wrapper">
-        <div class="logo">
-            <img src="{% static 'images/logo.png' %}" alt=""> 
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="">
+            </div>
+            <div class="arrow"></div>
+            <div class="logo">
+                <img src="{% static 'images/website_logo.png' %}" alt="">
+            </div>
         </div>
-        <div class="text-center mx-auto mt-4 name" style="padding-left: 37%;">Auth5</div>
-        <div style="margin-bottom: 10px; margin-top: 10px;">Input your Auth5 credentials to be granted access to your tbd account</div>
+        <div class="name">Authenticate with Auth5</div>
+        <div style="margin-bottom: 10px; margin-top: 10px;">Input your Auth5 credentials to be granted access to your
+            tbd account</div>
         <form class="p-3 mt-3" id="loginForm" method="post" action="/authentication/{{website_name}}/">
             <!-- CSRF token -->
             {% csrf_token %}
@@ -38,4 +73,5 @@
         <div class="text-center fs-6">{{error_message}}</div>
     </div>
 </body>
+
 </html>
