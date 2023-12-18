@@ -1,134 +1,36 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
+# Auth5
+### MAVIGO DevCareer Web5 hackathon repo
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+Auth5 is a web5 3rd party Authentication system.
+Auth5 helps users sign into and use web applications without sharing any of their personal information with such applications.
+It also ensures users have full control of and can determine who can view / access their data on a website.
 
-  <title>Auth5</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+Auth5 users will have to create an account on Auth5. A user Id and authentication token is automatically generated..
+On the Auth5 dashboard, User’s will specify the corresponding records of their PII and their DIDs.
 
-  <!-- Favicons -->
-  <link href="{% static 'images/logo.png' %}" rel="icon">
-  <link href="{% static 'images/apple-touch-icon.png' %}" rel="apple-touch-icon">
+Websites will also have to create an account on Auth5. Each website will be associated with an ID.
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+When a user tries to log into a web application, there will be a sign-in with the Auth5 button.
+When clicked, a dialog box / page pops up and the user enters his Auth5 username and password.
 
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+If these details are correct:
+	If the user has no previous account on the website, an identification string is generated on Auth5 servers and sent to the website the user is trying to authenticate with. The website saves this string and uses it to identify the user. Auth5 also stores this string and uses it to link the user to his account on the site.
 
-  <!-- Template Main CSS File -->
-  <link href="{% static 'css/landing.css' %}" rel="stylesheet">
-<body>
+	If the user already has an account on the site, his/her Id is fetched and sent to the site with an authentication and the user is logged in.
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+None of the user’s personal identifiable information is stored on the site but instead stored on DWNs.
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{% static 'images/logo.png' %}" alt="">
-        <span>Auth5</span>
-      </a>
+Only users who a data owner grants access can view any of his/her personal identifiable information.
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="/account/website/login/">Website Account Login</a></li>
-          <li><a class="nav-link scrollto" href="/account/login/">User Account Login</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+Let’s say user A visit’s user B’s profile. A script running on the user’s browser will send a request to Auth5 with the following details:
+- Website’s ID
+- User A ID
+- User B ID
+- A list of fields required to view user B’s profile
 
-    </div>
-  </header><!-- End Header -->
+Auth5 checks if User A granted permission to User B’s to access the data he is requesting. If he did, the requested data is gotten from user B’s DWN and returned to the web browser else, the data won’t be returned and the page won’t be viewable or the user B’s PII won’t be available on the page.
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">Decentralization, Privacy, Data Security and Control</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">We give you total and absolute control of your Personal Identifiable information on the internet</h2>
-          <div data-aos="fade-up" data-aos-delay="600">
-            <div class="text-center text-lg-start" style="margin-top: 10px;">
-                <a href="/account/register"><button class="button-64" role="button"><span class="text">Get started as A web user</span></button></a>
-                <a href="/account/website/register"><button class="button-64" role="button" style="margin-top: 10px;"><span class="text">Get started as A website owner</span></button></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="{% static 'images/dec.png' %}" class="img-fluid" alt="">
-        </div>
-      </div>
-    </div>
-  </section><!-- End Hero -->
-    <div class="container mt-5 mb-5">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <img src="{% static 'images/welcome.jpg' %}" alt="Auth5 Logo" class="img-fluid">
-        </div>
-        <div class="col-md-6">
-          <h1 data-aos="fade-up">How Auth5 Works</h1>
-          <p class="lead">
-            Auth5 is a 3rd party Authentication system but compared to regular Web 2.0 3rd party Authentication, We:
-          </p>
-          <ol class="lead">
-             <li>Don't have or store your personal data</li>
-            <li>Ensure None of your Personal Data is shared with websites you authenticate with.</li>
-            <li>Ensure your data is only accessed by web users you grant access</li>
-          </ol>
-          <ul class="lead">
-            <li class="lead">You store your data on your Decentralized Web Nodes.</ii>
-            <li class="lead">On your Auth5 account you decide the rules and permissions of who can access your data and when they can.</li>
-            <li class="lead">We fetch this data from your DWN and send them to web users you grant access to, when these web users visit sites that require your data.</li>
-            <li class="lead">This data is sent directly to their browsers. Even web servers of the websites they visit can't access your data.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="container mt-10 mb-5 text-center">
-        <h1 data-aos="fade-up" class="justify-items-center">Secure Data Access with Auth5</h1>
-    </div>
-    <div class="container mt-5 mb-5">
-      <div class="row align-items-flex-start">
-        <div class="col-md-6 order-md-2">
-          <img src="{% static 'images/data.jpg' %}" alt="Data Access" class="img-fluid">
-        </div>
-        <div class="col-md-6">
-          <p class="lead">
-            Safeguarding Personal Identifiable Information (PII) is our priority.
-          </p>
-          <ul class="lead">
-            <li>For pages requiring PII, a request is sent from the user's browser</li>
-            <li>The requesting user must be authenticated. We will validate if the data owner has granted the requesting user access.</li>
-            <li>If approved, we will fetch the data from the user's secure data vault and forward it to the requesting user</li>
-          </ul>
-          <p class="lead">Imagine Facebook but:</p>
-          <ul>
-              <li class="lead">all your personal data is stored with you and not on Facebook Servers</li>
-              <li class="lead">Your data isn't sold to advertisers and</li>
-              <li class="lead">Only a certain group of people you trust can access any of your personal identifying information on Facebook</li>
-          </ul>
-          <p class="lead">This is the result on websites you authenticate with Auth5</p>
-        </div>
-      </div>
-    </div>
-
-
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static 'js/main.js' %}"></script>
-
-</body>
-
-</html>
-
-
+There will be later improvements to set protocols and define rules on what data can be accessed by whom e.g only people from Africa that are between 30 - 40 years old can view my data of birth e.t.c. Websites could also request certain required data from users such as hair colour, height e.t.c but we might now work on this now. Let’s get the MVP up and running.
+## Authors :
+* Twitter: **[God'sfavour Idowu-Agida](https://twitter.com/DudeGFA)** Github: <[DudeGFA](https://github.com/DudeGFA)>
+* **Mahlet Seifu** Github: <[Mahlet2123](https://github.com/Mahlet2123)>
