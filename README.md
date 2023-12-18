@@ -33,4 +33,4 @@ Auth5 checks if User A granted permission to User B’s to access the data he is
 There will be later improvements to set protocols and define rules on what data can be accessed by whom e.g only people from Africa that are between 30 - 40 years old can view my data of birth e.t.c. Websites could also request certain required data from users such as hair colour, height e.t.c but we might now work on this now. Let’s get the MVP up and running.
 ## Authors :
 * Twitter: **[God'sfavour Idowu-Agida](https://twitter.com/DudeGFA)** Github: <[DudeGFA](https://github.com/DudeGFA)>
-* Github: **Mahlet Seifu** <[Mahlet2123](https://github.com/Mahlet2123)>
+* **Mahlet Seifu** Github: <[Mahlet2123](https://github.com/Mahlet2123)>
