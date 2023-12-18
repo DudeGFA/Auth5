@@ -28,10 +28,9 @@ Let’s say user A visit’s user B’s profile. A script running on the user’
 - User B ID
 - A list of fields required to view user B’s profile
 
-## Authors :
-* Twitter: **[God'sfavour Idowu-Agida](https://twitter.com/DudeGFA)** Github: <[DudeGFA](https://github.com/DudeGFA)>
-* Github: **Mahlet Seifu** <[Mahlet2123](https://github.com/Mahlet2123)>
-
 Auth5 checks if User A granted permission to User B’s to access the data he is requesting. If he did, the requested data is gotten from user B’s DWN and returned to the web browser else, the data won’t be returned and the page won’t be viewable or the user B’s PII won’t be available on the page.
 
 There will be later improvements to set protocols and define rules on what data can be accessed by whom e.g only people from Africa that are between 30 - 40 years old can view my data of birth e.t.c. Websites could also request certain required data from users such as hair colour, height e.t.c but we might now work on this now. Let’s get the MVP up and running.
+## Authors :
+* Twitter: **[God'sfavour Idowu-Agida](https://twitter.com/DudeGFA)** Github: <[DudeGFA](https://github.com/DudeGFA)>
+* Github: **Mahlet Seifu** <[Mahlet2123](https://github.com/Mahlet2123)>
