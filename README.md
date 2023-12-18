@@ -1,5 +1,5 @@
 # Auth5
-MAVIGO DevCareer Web5 hackathon repo
+### MAVIGO DevCareer Web5 hackathon repo
 
 Auth5 is a web5 3rd party Authentication system.
 Auth5 helps users sign into and use web applications without sharing any of their personal information with such applications.
