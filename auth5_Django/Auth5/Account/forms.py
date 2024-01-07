@@ -36,7 +36,7 @@ class NewWebsiteUserForm(UserCreationForm):
 class WebsiteForm(forms.ModelForm):
 	class Meta:
 		model = Website
-		fields = ("link", "user", "callback_url")
+		fields = ("link", "user", "callback_url", "logo")
 
 class UrlForm(forms.Form):
     url = forms.URLField(label='Enter a URL')

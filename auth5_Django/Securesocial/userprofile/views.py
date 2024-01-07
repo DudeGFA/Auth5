@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UserProfile
 
-class HomeView(LoginRequiredMixin, View):
+class HomeView(View):
     def get(self, request):
         return render(request, "home_page.html")
 # Create your views here.

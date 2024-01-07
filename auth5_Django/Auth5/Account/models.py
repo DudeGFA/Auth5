@@ -9,16 +9,9 @@ from django.db import models
 import uuid
 from django.contrib.auth.models import User
 
-def website_logo_upload(instance, filename):
-    # Define the upload path for the logo in the website_logos directory
-    return f'website_logos/{filename}'
-
 class Website(models.Model):
     link = models.URLField()
-    first_name = models.CharField(max_length=25)
-    last_name = models.CharField(max_length=25)
-    birth_date = models.DateTimeField()
-    #logo = models.ImageField(upload_to=website_logo_upload, blank=True)
+    logo = models.ImageField(default='images/logos/default.png', upload_to='images/logos', null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='website')
     callback_url = models.URLField()
     def __str__(self):

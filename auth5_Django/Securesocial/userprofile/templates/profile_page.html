@@ -5,6 +5,69 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
+        <script>
+            // Replace 'your_token_here' with your actual authorization token
+            // const authToken = '{{user.profile.token}}';
+
+            // Define the data to be sent in the request body
+            const requestBody = {
+            fields: ['first_name', 'last_name', 'date_of_birth', 'occupation', 'email', 'address', 'phone_number']
+            };
+
+            // Make the fetch API request
+            fetch('https://auth5.pythonanywhere.com/fetch/decentralizedsocial/{{user.username}}/{{profile_owner.username}}/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+            })
+            .then(response => {
+                if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the response data
+                console.log('Response:', data);
+                fields_data = data.response_content
+                if (fields_data.address) {
+                    document.getElementById('address2').innerHTML = fields_data.address
+                    document.getElementById('address1').innerHTML = fields_data.address
+                } else {
+                    document.getElementById('address2').innerHTML = 'User not authorized'
+                    document.getElementById('address1').innerHTML = 'User not authorized'
+                }
+
+                if (fields_data.occupation) {
+                    document.getElementById('occupation').innerHTML = fields_data.occupation
+                } else {
+                    document.getElementById('occupation').innerHTML = 'User not authorized'
+                }
+                if (fields_data.phone_number) {
+                    document.getElementById('phone_number').innerHTML = fields_data.phone_number
+                } else {
+                    document.getElementById('phone_number').innerHTML = 'User not authorized'
+                }
+                if (fields_data.email) {
+                    document.getElementById('email').innerHTML = fields_data.email
+                } else {
+                    document.getElementById('email').innerHTML = 'User not authorized'
+                }
+                if (fields_data.first_name && fields_data.last_name) {
+                    document.getElementById('full_name').innerHTML = fields_data.first_name + fields_data.last_name
+                    document.getElementById('full_name2').innerHTML = fields_data.first_name + fields_data.last_name
+                } else {
+                    document.getElementById('full_name').innerHTML = 'User not authourized'
+                    document.getElementById('full_name2').innerHTML = 'User not authourized'
+                }
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error:', error.message);
+            });
+        </script>
         <link
         rel="stylesheet"
         type="text/css"
@@ -25,7 +88,7 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="main-breadcrumb">
                     <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
                     <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                     </ol>
@@ -94,48 +157,5 @@
                 </div>
             </div>
         </div>
-        <script>
-            // Replace 'your_token_here' with your actual authorization token
-            // const authToken = '{{user.profile.token}}';
-
-            // Define the data to be sent in the request body
-            const requestBody = {
-            fields: ['first_name', 'last_name', 'date_of_birth', 'occupation', 'email', 'address', 'phone_number']
-            };
-
-            // Make the fetch API request
-            fetch('https://auth5.pythonanywhere.com/fetch/decentralizedsocial/{{user.username}}/{{profile_owner.username}}/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody)
-            })
-            .then(response => {
-                if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Handle the response data
-                console.log('Response:', data);
-                fields_data = data.response_content
-                // document.getElementById('first_name').innerHtml = fields_data.first_name
-                // document.getElementById('last_name').innerHtml = fields_data.last_name
-                // document.getElementById('address').innerHTML = fields_data.address
-                document.getElementById('address2').innerHTML = fields_data.address
-                document.getElementById('occupation').innerHTML = fields_data.occupation
-                document.getElementById('address1').innerHTML = fields_data.address
-                document.getElementById('phone_number').innerHTML = fields_data.phone_number
-                document.getElementById('email').innerHTML = fields_data.email
-                document.getElementById('full_name').innerHTML = fields_data.first_name + fields_data.last_name
-                document.getElementById('full_name2').innerHTML = fields_data.first_name + fields_data.last_name
-            })
-            .catch(error => {
-                // Handle errors
-                console.error('Error:', error.message);
-            });
-        </script>
     </body>
 </html>
