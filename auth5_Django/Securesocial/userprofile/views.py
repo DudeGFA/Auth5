@@ -12,6 +12,10 @@ class HomeView(View):
     def get(self, request):
         return render(request, "home_page.html")
 # Create your views here.
+class UserListView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, "list_users_page.html", {'users': User.objects.all()})
+
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, request, id):
         try:
@@ -42,7 +46,7 @@ class CallbackView(View):
                 UserProfile.objects.update_or_create(**conditions, defaults=defaults)
                 login(request, user)
                 return redirect("/userprofile/"+id)
-            print('Invalid token or Id, response returned with status code: ', response.status_code)  
+            print('Invalid token or Id, response returned with status code: ', response.status_code)
             return render(request, "registration/login.html", {'error': 'something went wrong'})
-        print('token or id not specified in callback request', 'token: ', token, 'id: ',id)  
+        print('token or id not specified in callback request', 'token: ', token, 'id: ',id)
         return render(request, "registration/login.html/", {'error': 'something went wrong'})

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>List users</title>
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href='{% static "bootstrap/css/bootstrap.css" %}'
+        />
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href='{% static "assets/css/style.css" %}'
+        />
+
+        <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="main-body">
+
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb" class="main-breadcrumb">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                    </ol>
+                </nav>
+                <!-- /Breadcrumb -->
+
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                {% for user in users %}
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                    <h6 class="mb-0">{{user.username}}</h6>
+                                    </div>
+                                    <a class="col-sm-9 text-secondary" id="full_name" href="/userprofile/{{user.username}}/">
+                                    https://decentralizedsocial.pythonanywhere.com/userprofile/{{user.username}}/
+                                    </a>
+                                </div>
+                                <hr>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

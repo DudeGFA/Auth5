@@ -6,4 +6,5 @@ urlpatterns = [
     path("userprofile/<str:id>/", views.UserProfileView.as_view(), name="userprofile"),
     path("login/", views.LoginView.as_view()),
     path("callback/", views.CallbackView.as_view()),
+    path("users/", views.UserListView.as_view()),
 ]

@@ -36,31 +36,31 @@
                     document.getElementById('address2').innerHTML = fields_data.address
                     document.getElementById('address1').innerHTML = fields_data.address
                 } else {
-                    document.getElementById('address2').innerHTML = 'User not authorized'
-                    document.getElementById('address1').innerHTML = 'User not authorized'
+                    document.getElementById('address2').innerHTML = 'null field'
+                    document.getElementById('address1').innerHTML = 'null field'
                 }
 
                 if (fields_data.occupation) {
                     document.getElementById('occupation').innerHTML = fields_data.occupation
                 } else {
-                    document.getElementById('occupation').innerHTML = 'User not authorized'
+                    document.getElementById('occupation').innerHTML = 'null field'
                 }
                 if (fields_data.phone_number) {
                     document.getElementById('phone_number').innerHTML = fields_data.phone_number
                 } else {
-                    document.getElementById('phone_number').innerHTML = 'User not authorized'
+                    document.getElementById('phone_number').innerHTML = 'null field'
                 }
                 if (fields_data.email) {
                     document.getElementById('email').innerHTML = fields_data.email
                 } else {
-                    document.getElementById('email').innerHTML = 'User not authorized'
+                    document.getElementById('email').innerHTML = 'null field'
                 }
                 if (fields_data.first_name && fields_data.last_name) {
                     document.getElementById('full_name').innerHTML = fields_data.first_name + fields_data.last_name
                     document.getElementById('full_name2').innerHTML = fields_data.first_name + fields_data.last_name
                 } else {
-                    document.getElementById('full_name').innerHTML = 'User not authourized'
-                    document.getElementById('full_name2').innerHTML = 'User not authourized'
+                    document.getElementById('full_name').innerHTML = 'null field'
+                    document.getElementById('full_name2').innerHTML = 'null field'
                 }
             })
             .catch(error => {
