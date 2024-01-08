@@ -55,9 +55,12 @@
                 } else {
                     document.getElementById('email').innerHTML = 'null field'
                 }
-                if (fields_data.first_name && fields_data.last_name) {
-                    document.getElementById('full_name').innerHTML = fields_data.first_name + fields_data.last_name
-                    document.getElementById('full_name2').innerHTML = fields_data.first_name + fields_data.last_name
+                if (fields_data.first_name && fields_data.last_name && fields_data.first_name !== 'Unauthorized' && fields_data.last_name !== 'Unauthorized') {
+                    document.getElementById('full_name').innerHTML = fields_data.first_name + ' ' + fields_data.last_name
+                    document.getElementById('full_name2').innerHTML = fields_data.first_name + ' ' + fields_data.last_name
+                } else if(fields_data.first_name === 'Unauthorized' || fields_data.last_name === 'Unauthorized') {
+                    document.getElementById('full_name').innerHTML = 'Unauthorized'
+                    document.getElementById('full_name2').innerHTML = 'Unauthorized'
                 } else {
                     document.getElementById('full_name').innerHTML = 'null field'
                     document.getElementById('full_name2').innerHTML = 'null field'
