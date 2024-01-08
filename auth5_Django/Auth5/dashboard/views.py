@@ -137,14 +137,14 @@ class FetchDataView(generics.GenericAPIView):
             # Access the validated list
             fields = serializer.validated_data.get("fields")
         else:
-            print(serializer.errors)
-            return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+            # print(serializer.errors)
+            return Response({'message':'Wrong format for requested fields', 'errors': serializer.errors, 'request_data': request.data}, status=status.HTTP_400_BAD_REQUEST)
         # print(fields)
         data_owner_website_account = get_object_or_404(WebsiteAccount, user_id_on_website=data_owner_id, website__user__username=website_name)
         user_website_account = get_object_or_404(WebsiteAccount, user_id_on_website=user_id, website__user__username=website_name)
         # print(fields, data_owner_acct)
         if not fields or not data_owner_website_account or not user_website_account:
-            return Response({'error':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message':'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
         field_group = data_owner_website_account.field_group
         # print(field_group)
         payload = {}
