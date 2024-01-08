@@ -115,7 +115,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ALLOWED_ORIGINS = ["https://*","http://*", 'https://decentralizedsocial.pythonanywhere.com']
+CORS_ALLOWED_ORIGINS = ["https://*","http://*", 'https://decentralizedsocial.onrender.com']
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
