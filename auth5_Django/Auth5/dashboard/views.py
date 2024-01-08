@@ -164,5 +164,5 @@ class FetchDataView(generics.GenericAPIView):
             else:
                 invalid[field] = 'Undefined field'
         if (payload == {}):
-            return Response({'response_content': invalid})
+            return Response({'response_content': invalid}, status=status.HTTP_200_OK)
         return self.send_post_request(payload, invalid)
