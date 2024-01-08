@@ -39,7 +39,7 @@ class HomeView(LoginRequiredMixin, View):
         active_field_group = FieldGroup.objects.filter(owner=request.user.profile, name=group).first()
         context = {'active_field_group': active_field_group, 'field_group_names': field_group_names}
         return render(request, 'dashboard.html', context)
-    
+
     def post(self, request, group=None):
         try:
             if not request.user.profile:
@@ -97,7 +97,7 @@ class WebsiteDashboardView(LoginRequiredMixin, View):
         except Exception:
             pass
         return redirect('/account/website/login/')
-    
+
     def post(self, request):
         callback_url = request.POST.get('callback-url')
         url_form = UrlForm({'url': callback_url})
@@ -112,7 +112,7 @@ class WebsiteDashboardView(LoginRequiredMixin, View):
 
 # @method_decorator(csrf_exempt, name='dispatch')
 class FetchDataView(generics.GenericAPIView):
-    def send_post_request(self, payload):
+    def send_post_request(self, payload, invalid):
         url = 'https://auth5js.onrender.com'  # Replace with your target URL
         # Send the POST request
         try:
@@ -121,10 +121,15 @@ class FetchDataView(generics.GenericAPIView):
             response = requests.post(url, data=payload, headers={"Content-Type": "application/json"})
             # print(response.text)
             # Return a JsonResponse with the response content
+            # Parse the response JSON
+            response_content = response.json()
+
+            # Combine response_content and invalid into a new dictionary
+            combined_dict = dict(response_content, **invalid)
         except requests.RequestException as e:
             print(e)
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        return Response({'response_content': response.json()}, status=response.status_code)
+        return Response({'response_content': combined_dict}, status=response.status_code)
 
     def post(self, request, website_name, user_id, data_owner_id):
         serializer = FieldsSerializer(data=request.data)
@@ -143,6 +148,7 @@ class FetchDataView(generics.GenericAPIView):
         field_group = data_owner_website_account.field_group
         # print(field_group)
         payload = {}
+        invalid = {}
         print(fields)
         for field in fields:
             field_obj = field_group.field_set.filter(name=field.strip()).first()
@@ -153,6 +159,10 @@ class FetchDataView(generics.GenericAPIView):
                     did = field_obj.did
                     recordid = field_obj.recordid
                     payload[field_obj.name] = {'did':did, 'recordId': recordid}
+                else:
+                    invalid[field_obj.name] = 'Unauthorized'
+            else:
+                invalid[field] = 'Undefined field'
         if (payload == {}):
-            return Response({'message':"User isn\'t authorized on any of the requested fields"}, status=status.HTTP_401_UNAUTHORIZED)
-        return self.send_post_request(payload)
+            Response({'response_content': invalid})
+        return self.send_post_request(payload, invalid)
