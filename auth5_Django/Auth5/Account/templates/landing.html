@@ -71,50 +71,48 @@
           <img src="{% static 'images/welcome.jpg' %}" alt="Auth5 Logo" class="img-fluid">
         </div>
         <div class="col-md-6">
-          <h1 data-aos="fade-up">Welcome to Auth5</h1>
+          <h1 data-aos="fade-up">How Auth5 Works</h1>
           <p class="lead">
-            Explore the world of Auth5 with ease! Follow these simple steps to get started:
+            Auth5 is a 3rd party Authentication system but compared to regular Web 2.0 3rd party Authentication, We:
           </p>
           <ol class="lead">
-            <li>Create your account on our platform.</li>
-            <li>Click the button below:</li>
+             <li>Don't have or store your personal data</li>
+            <li>Ensure None of your Personal Data is shared with websites you authenticate with.</li>
+            <li>Ensure your data is only accessed by web users you grant access</li>
           </ol>
-          <div class="text-center">
-            <button class="button-64 mb-5" style="margin-top: 10px;"><span class="text">Sign up with Auth5</span></button>
-          </div>
-          <p class="lead">
-            Let the magic unfold as we handle the intricacies behind the scenes. We'll guide you back to your chosen
-            callback location with a unique digital ID. Safeguard this ID in your database – it's your digital fingerprint
-            for effortless future logins.
-            Embrace the digital journey with your trusty ID as your companion.
-            Welcome to the future of hassle-free authentication!
-          </p>
+          <ul class="lead">
+            <li class="lead">You store your data on your Decentralized Web Nodes.</ii>
+            <li class="lead">On your Auth5 account you decide the rules and permissions of who can access your data and when they can.</li>
+            <li class="lead">We fetch this data from your DWN and send them to web users you grant access to, when these web users visit sites that require your data.</li>
+            <li class="lead">This data is sent directly to their browsers. Even web servers of the websites they visit can't access your data.</li>
+          </ul>
         </div>
       </div>
     </div>
+    <div class="container mt-10 mb-5 text-center">
+        <h1 data-aos="fade-up" class="justify-items-center">Secure Data Access with Auth5</h1>
+    </div>
     <div class="container mt-5 mb-5">
-      <div class="row align-items-center">
+      <div class="row align-items-flex-start">
         <div class="col-md-6 order-md-2">
           <img src="{% static 'images/data.jpg' %}" alt="Data Access" class="img-fluid">
         </div>
         <div class="col-md-6">
-          <h1 data-aos="fade-up">Secure Data Access with Auth5</h1>
           <p class="lead">
-            Safeguarding Personal Identifiable Information (PII) is our priority. Follow these steps to securely retrieve
-            PII from your Auth5-authenticated users:
+            Safeguarding Personal Identifiable Information (PII) is our priority.
           </p>
-          <ol class="lead">
-            <li>For pages requiring PII, send a request to:</li>
-          </ol>
-          <div class="text-center">
-            <button class="button-64 mb-5" style="margin-top: 10px;">
-              <span class="text">Send PII Request</span>
-            </button>
-          </div>
-          <p class="lead">
-            The requesting user must be authenticated. We will validate if the data owner has granted access. If approved,
-            we will fetch the data from the user's secure data vault and forward it to you. 
-          </p>
+          <ul class="lead">
+            <li>For pages requiring PII, a request is sent from the user's browser</li>
+            <li>The requesting user must be authenticated. We will validate if the data owner has granted the requesting user access.</li>
+            <li>If approved, we will fetch the data from the user's secure data vault and forward it to the requesting user</li>
+          </ul>
+          <p class="lead">Imagine Facebook but:</p>
+          <ul>
+              <li class="lead">all your personal data is stored with you and not on Facebook Servers</li>
+              <li class="lead">Your data isn't sold to advertisers and</li>
+              <li class="lead">Only a certain group of people you trust can access any of your personal identifying information on Facebook</li>
+          </ul>
+          <p class="lead">This is the result on websites you authenticate with Auth5</p>
         </div>
       </div>
     </div>
