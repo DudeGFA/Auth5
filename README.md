@@ -1,6 +1,9 @@
 # Auth5
 ### MAVIGO DevCareer Web5 hackathon repo
 
+#### [https://auth5-if1y.onrender.com/](https://auth5-if1y.onrender.com/)
+#### Sample Implementation: [https://decentralizedsocial.onrender.com/](https://decentralizedsocial.onrender.com/)
+
 Auth5 is a web5 3rd party Authentication system.
 Auth5 helps users sign into and use web applications without sharing any of their personal information with such applications.
 It also ensures users have full control of and can determine who can view / access their data on a website.
